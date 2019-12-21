@@ -2250,7 +2250,7 @@ MonoBehaviour:
   - {fileID: 5225831561217036612, guid: c4c017c3e6138944aa0b30da40a2f00e, type: 3}
   - {fileID: 5225831561217036612, guid: b0a5612a3e12c914ba6e493a039981cf, type: 3}
   - {fileID: 5225831561217036612, guid: 73398d3d987a3e745bc63da6d274a93a, type: 3}
-  Size: {x: 100, y: 100}
+  Size: {x: 20, y: 15}
   AccessiblePercentage: 0.6
 --- !u!4 &2083344931
 Transform:
