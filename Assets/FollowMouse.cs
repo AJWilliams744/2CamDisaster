@@ -25,14 +25,24 @@ public class FollowMouse : MonoBehaviour
     void Update()
     {
         //Same Code from mouse Click
-        
-        EnvironmentTile tile = tileFinder.GetMouseRayTargetTile();
-        if (tile != null)
+
+        //EnvironmentTile tile = tileFinder.GetMouseRayTargetTile();
+        //if (tile != null)
+        //{
+        //    Vector3 tempVec = tile.Position;
+        //    tempVec.y = Height;
+        //    transform.position = Vector3.Lerp(transform.position,tempVec, Time.deltaTime * 3);           
+        //}
+        RaycastHit hit;
+        Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit))
         {
-            Vector3 tempVec = tile.Position;
+            Vector3 tempVec = hit.transform.position;
             tempVec.y = Height;
-            transform.position = Vector3.Lerp(transform.position,tempVec, Time.deltaTime * 3);           
+            transform.position = Vector3.Lerp(transform.position,tempVec, Time.deltaTime * 3); 
+
+            
         }
-        
     }
 }

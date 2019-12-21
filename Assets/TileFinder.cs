@@ -17,10 +17,10 @@ public class TileFinder : MonoBehaviour
 
     public EnvironmentTile GetMouseRayTargetTile()
     {
-        Ray screenClick = MainCamera.ScreenPointToRay(Input.mousePosition);
-        int hits = Physics.RaycastNonAlloc(screenClick, mRaycastHits);
+        Ray screenHit = MainCamera.ScreenPointToRay(Input.mousePosition);
+        int hits = Physics.RaycastNonAlloc(screenHit, mRaycastHits);
         if (hits > 0)
-        {
+        {            
             EnvironmentTile tile = mRaycastHits[0].transform.GetComponent<EnvironmentTile>();
             if (tile != null)
             {

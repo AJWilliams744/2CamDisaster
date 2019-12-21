@@ -37,8 +37,7 @@ public class InputHandler : MonoBehaviour
             HandleCameraFollow();
         }
         else
-        {
-         
+        { 
             HandleCameraStop();
         }
     }

@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour
 
     private Coroutine camFollow;
 
-    private bool camFollowTrigger;
+    private bool camFollowTrigger = false;
     private Vector3 mountLastKnownPosition;
 
     private Vector3 followPosition;
@@ -74,7 +74,8 @@ public class CameraFollow : MonoBehaviour
     {
         while (true)
         {
-            followPosition = camFollowTrigger ? mountLastKnownPosition : mount.transform.position;
+            
+            followPosition = mount.transform.position;
             //if (camFollowTrigger) speed = 0.01f / Vector3.Distance(mountLastKnownPosition + offset, transform.position + offset); else speed = 5;
             followPosition += offset;
             if (smoothFollow)
@@ -89,7 +90,7 @@ public class CameraFollow : MonoBehaviour
 
             if (!lockRotation) transform.rotation = mount.transform.rotation;
 
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForEndOfFrame();
         }
 
     }
@@ -119,7 +120,7 @@ public class CameraFollow : MonoBehaviour
 
     public void StartFollow()
     {
-        ForceStopFollow();
+        if(camFollowTrigger) ForceStopFollow();
         if (camFollow == null) camFollow = StartCoroutine(StartCamFollow());
     }
 
