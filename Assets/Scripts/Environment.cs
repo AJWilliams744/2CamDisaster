@@ -232,14 +232,14 @@ public class Environment : MonoBehaviour
         {
             // Nothing to solve if there is a direct connection between these two locations
             EnvironmentTile directConnection = begin.Connections.Find(c => c == destination);
-           // Vector3 direction = begin.transform.position - destination.transform.position;
+            // Vector3 direction = begin.transform.position - destination.transform.position;
             //Debug.LogError(direction);
-            if (directConnection == null)
+            if (directConnection == null || !IsTileAccessible(begin, directConnection))
             {
                 // Set all the state to its starting values
                 mToBeTested.Clear();
 
-                for( int count = 0; count < mAll.Count; ++count )
+                for (int count = 0; count < mAll.Count; ++count)
                 {
                     mAll[count].Parent = null;
                     mAll[count].Global = float.MaxValue;
@@ -280,7 +280,6 @@ public class Environment : MonoBehaviour
                             if (!neighbour.Visited && IsTileAccessible(currentNode, neighbour))
                             {
                                 mToBeTested.Add(neighbour);
-
 
                                 //if (!neighbour.Visited && neighbour.IsAccessible)
                                 //{
@@ -326,9 +325,10 @@ public class Environment : MonoBehaviour
                     Debug.LogWarning("Path Not Found");
                 }
             }
-            else
+            else 
             {
                 result = new List<EnvironmentTile>();
+                result.Add(begin);
                 result.Add(begin);
                 result.Add(destination);
                 Debug.LogFormat("Direct Connection: {0} <-> {1} {2} long", begin, destination, TileSize);
@@ -349,9 +349,10 @@ public class Environment : MonoBehaviour
         return Size;
     }
 
+    // Is there a wall in the way
     private bool IsTileAccessible(EnvironmentTile currentTile, EnvironmentTile NeighbourTile)
     {
-
+        if (NeighbourTile == null) return false;
         if (currentTile.IsAccessible && NeighbourTile.IsAccessible) return true;
 
         

@@ -76,7 +76,7 @@ public class Character : MonoBehaviour
                 position = next;
             }            
         }
-        characterAnimation.SetWalking(false);
+        //characterAnimation.SetWalking(false);
     }
 
     public void GoTo(List<EnvironmentTile> route)
