@@ -34,7 +34,8 @@ public class Character : MonoBehaviour
                 yield return null;
             }
         }
-        
+        characterAnimation.SetWalking(false);
+
     }
 
     public void Turn(Vector3 turnValue)
@@ -73,9 +74,9 @@ public class Character : MonoBehaviour
                 yield return DoMove(position, next);
                 CurrentPosition = route[count];
                 position = next;
-            }
-            characterAnimation.SetWalking(false);
+            }            
         }
+        characterAnimation.SetWalking(false);
     }
 
     public void GoTo(List<EnvironmentTile> route)
@@ -83,8 +84,9 @@ public class Character : MonoBehaviour
         // Clear all coroutines before starting the new route so 
         // that clicks can interupt any current route animation
         StopAllCoroutines();
-        StartCoroutine(DoGoTo(route));
         characterAnimation.SetWalking(true);
+        StartCoroutine(DoGoTo(route));
+        
     }
 
     public void SetSitting(bool value)

@@ -18,12 +18,18 @@ public class Environment : MonoBehaviour
     private const float TileSize = 10.0f;
     private const float TileHeight = 2.5f;
 
+    private Vector3 directionLeft = new Vector3(10, 0, 0);
+    private Vector3 directionRight = new Vector3(-10, 0, 0);
+    private Vector3 directionForward = new Vector3(0, 0, -10);
+    private Vector3 directionBack = new Vector3(0, 0, 10);
+
     public EnvironmentTile Start { get; private set; }
 
     private void Awake()
     {
         mAll = new List<EnvironmentTile>();
         mToBeTested = new List<EnvironmentTile>();
+       
     }
 
     private void OnDrawGizmos()
@@ -97,6 +103,8 @@ public class Environment : MonoBehaviour
                 {                    
                     //rotate from center of tile
                     tile.transform.RotateAround(tile.transform.position + new Vector3(5, 0, 5), Vector3.up, GetRandomRotation());
+                   // Debug.LogError(tile.transform.eulerAngles.y);
+                    //tile.transform.rotation = Quaternion.Euler(new Vector3(0,(int)tile.transform.eulerAngles.y,0));
                 }
 
                 tile.gameObject.name = string.Format("Tile({0},{1})", x, y);
@@ -188,7 +196,7 @@ public class Environment : MonoBehaviour
         // Use the locations of the node to estimate how close they are by line of sight
         // experiment here with better ways of estimating the distance. This is used  to
         // calculate the global goal and work out the best order to prossess nodes in
-        return Vector3.Distance(a.Position, b.Position);
+        return Vector3.Distance(a.Position, b.Position) * 10;
     }
 
     public void GenerateWorld()
@@ -224,6 +232,8 @@ public class Environment : MonoBehaviour
         {
             // Nothing to solve if there is a direct connection between these two locations
             EnvironmentTile directConnection = begin.Connections.Find(c => c == destination);
+           // Vector3 direction = begin.transform.position - destination.transform.position;
+            //Debug.LogError(direction);
             if (directConnection == null)
             {
                 // Set all the state to its starting values
@@ -267,20 +277,27 @@ public class Environment : MonoBehaviour
                         {
                             EnvironmentTile neighbour = currentNode.Connections[count];
 
-                            if (!neighbour.Visited && neighbour.IsAccessible)
+                            if (!neighbour.Visited && IsTileAccessible(currentNode, neighbour))
                             {
                                 mToBeTested.Add(neighbour);
-                            }
 
-                            // Calculate the local goal of this location from our current location and 
-                            // test if it is lower than the local goal it currently holds, if so then
-                            // we can update it to be owned by the current node instead 
-                            float possibleLocalGoal = currentNode.Local + Distance(currentNode, neighbour);
-                            if (possibleLocalGoal < neighbour.Local)
-                            {
-                                neighbour.Parent = currentNode;
-                                neighbour.Local = possibleLocalGoal;
-                                neighbour.Global = neighbour.Local + Heuristic(neighbour, destination);
+
+                                //if (!neighbour.Visited && neighbour.IsAccessible)
+                                //{
+                                //    mToBeTested.Add(neighbour);
+                                //}
+
+                                // Calculate the local goal of this location from our current location and 
+                                // test if it is lower than the local goal it currently holds, if so then
+                                // we can update it to be owned by the current node instead 
+
+                                float possibleLocalGoal = currentNode.Local + Distance(currentNode, neighbour);
+                                if (possibleLocalGoal < neighbour.Local)
+                                {
+                                    neighbour.Parent = currentNode;
+                                    neighbour.Local = possibleLocalGoal;
+                                    neighbour.Global = neighbour.Local + Heuristic(neighbour, destination);
+                                }
                             }
                         }
                     }
@@ -295,6 +312,7 @@ public class Environment : MonoBehaviour
 
                     while (routeNode.Parent != null)
                     {
+                        //Debug.LogError(routeNode.gameObject.name);
                         result.Add(routeNode);
                         routeNode = routeNode.Parent;
                     }
@@ -333,10 +351,81 @@ public class Environment : MonoBehaviour
 
     private bool IsTileAccessible(EnvironmentTile currentTile, EnvironmentTile NeighbourTile)
     {
-        if (!currentTile.IsAccessible)
+
+        if (currentTile.IsAccessible && NeighbourTile.IsAccessible) return true;
+
+        
+        Vector3 direction = currentTile.Position - NeighbourTile.Position;  
+
+        if(direction == directionLeft)
         {
-            //NeighbourTile.gameObject.transform.rotation;
+           // Debug.LogError("LEFT");
+            return !IsFacingWall(currentTile, NeighbourTile, 270, 90);
         }
-        return false;
+        else if (direction == directionRight)
+        {
+           // Debug.LogError("right");
+            return !IsFacingWall(currentTile, NeighbourTile, 90, 270);
+        }
+        else if (direction == directionForward)
+        {
+           // Debug.LogError("forward");
+            if (currentTile.IsAccessible)
+            {
+                if (NeighbourTile.transform.eulerAngles.y == 180)
+                {
+                   // Debug.LogError("false");
+                    return false;
+                }
+                else
+                {
+                    //Debug.LogError("true");
+                }
+            }
+            else
+            {
+                return !IsFacingWall(currentTile, NeighbourTile, 0, 180);
+            }           
+        }
+        else if (direction == directionBack)
+        {
+           // Debug.LogError("back");
+            if (NeighbourTile.IsAccessible)
+            {
+                if (currentTile.transform.eulerAngles.y == 180)
+                {
+                   // Debug.LogError("false");
+                    return false;
+                }
+                else
+                {
+                    //Debug.LogError("true");
+                }
+            }
+            else
+            {
+                return !IsFacingWall(currentTile, NeighbourTile, 180, 0);
+            }
+            
+        }
+        
+        return true;
     }
+
+    //Checks if rotations match the wall position
+    private bool IsFacingWall(EnvironmentTile currentTile, EnvironmentTile NeighbourTile, float CurrentRotation, float NeightbourRotation)
+    {
+        if (currentTile.transform.eulerAngles.y == CurrentRotation || NeighbourTile.transform.eulerAngles.y == NeightbourRotation)
+        {
+           // Debug.LogError(currentTile.transform.eulerAngles.y);   
+            return true;
+        }
+        else
+        {
+            //Debug.LogError(currentTile.transform.eulerAngles.y);
+            return false;
+        }
+    }
+
+   
 }
