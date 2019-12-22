@@ -2247,11 +2247,8 @@ MonoBehaviour:
   - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
   InaccessibleTiles:
   - {fileID: 5225831561217036612, guid: 29c2d978ff921a247be04a590e1da0a2, type: 3}
-  - {fileID: 5225831561217036612, guid: c4c017c3e6138944aa0b30da40a2f00e, type: 3}
-  - {fileID: 5225831561217036612, guid: b0a5612a3e12c914ba6e493a039981cf, type: 3}
-  - {fileID: 5225831561217036612, guid: 73398d3d987a3e745bc63da6d274a93a, type: 3}
   Size: {x: 20, y: 15}
-  AccessiblePercentage: 0.6
+  AccessiblePercentage: 0.1
 --- !u!4 &2083344931
 Transform:
   m_ObjectHideFlags: 0

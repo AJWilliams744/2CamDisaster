@@ -38,7 +38,7 @@ public class FollowMouse : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            Vector3 tempVec = hit.transform.position;
+            Vector3 tempVec = hit.point;
             tempVec.y = Height;
             transform.position = Vector3.Lerp(transform.position,tempVec, Time.deltaTime * 3); 
 

@@ -92,6 +92,13 @@ public class Environment : MonoBehaviour
                 EnvironmentTile tile = Instantiate(prefab, position, Quaternion.identity, transform);
                 tile.Position = new Vector3( position.x + (TileSize / 2), TileHeight, position.z + (TileSize / 2));
                 tile.IsAccessible = isAccessible;
+
+                if (!isAccessible)
+                {                    
+                    //rotate from center of tile
+                    tile.transform.RotateAround(tile.transform.position + new Vector3(5, 0, 5), Vector3.up, GetRandomRotation());
+                }
+
                 tile.gameObject.name = string.Format("Tile({0},{1})", x, y);
                 mMap[x][y] = tile;
                 mAll.Add(tile);
@@ -108,6 +115,27 @@ public class Environment : MonoBehaviour
             position.x += TileSize;
             position.z = -(halfHeight * TileSize);
         }
+    }
+
+    private int GetRandomRotation()
+    {
+        int RotationValue = 0;
+        switch (Random.Range(0, 4))
+        {
+            case 0:
+                RotationValue = 0;
+                break;
+            case 1:
+                RotationValue = 90;
+                break;
+            case 2:
+                RotationValue = 180;
+                break;
+            case 3:
+                RotationValue = 270;
+                break;
+        }
+        return RotationValue;
     }
 
     private void SetupConnections()
@@ -167,6 +195,7 @@ public class Environment : MonoBehaviour
     {
         Generate();
         SetupConnections();
+       
     }
 
     public void CleanUpWorld()
@@ -300,5 +329,14 @@ public class Environment : MonoBehaviour
     public Vector2Int GetMaxTiles()
     {
         return Size;
+    }
+
+    private bool IsTileAccessible(EnvironmentTile currentTile, EnvironmentTile NeighbourTile)
+    {
+        if (!currentTile.IsAccessible)
+        {
+            //NeighbourTile.gameObject.transform.rotation;
+        }
+        return false;
     }
 }
