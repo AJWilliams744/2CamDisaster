@@ -428,5 +428,10 @@ public class Environment : MonoBehaviour
         }
     }
 
+    public EnvironmentTile GetRandomTile()
+    {
+        return mMap[1][1]; //TODO Return Random Tile
+    }
+
    
 }
