@@ -34,7 +34,7 @@ public class Character : MonoBehaviour
                 yield return null;
             }
         }
-        characterAnimation.SetWalking(false);
+       // characterAnimation.SetWalking(false);
 
     }
 
@@ -76,7 +76,7 @@ public class Character : MonoBehaviour
                 position = next;
             }            
         }
-        //characterAnimation.SetWalking(false);
+        characterAnimation.SetWalking(false);
     }
 
     public void GoTo(List<EnvironmentTile> route)

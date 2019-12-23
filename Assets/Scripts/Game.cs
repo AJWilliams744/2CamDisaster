@@ -24,6 +24,7 @@ public class Game : MonoBehaviour
     [SerializeField] private CharacterController characterController;
     [SerializeField] private InputHandler inputHandler;
     [SerializeField] private AudioListener mainCamAudio;
+    [SerializeField] private GameObject spotLight;
 
     private RaycastHit[] mRaycastHits;
     private Character mCharacter;
@@ -133,7 +134,8 @@ public class Game : MonoBehaviour
         mCharacter.SetRootMotion(false);
         directionalLight.intensity = 0;
 
-      
+        spotLight.SetActive(true);
+
     }
 
     public void Exit()

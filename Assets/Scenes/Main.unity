@@ -774,6 +774,7 @@ MonoBehaviour:
   characterController: {fileID: 896303078}
   inputHandler: {fileID: 896303079}
   mainCamAudio: {fileID: 963194226}
+  spotLight: {fileID: 1115977444}
 --- !u!4 &896303072
 Transform:
   m_ObjectHideFlags: 0
@@ -1558,7 +1559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1115977445
 Light:
   m_ObjectHideFlags: 0
@@ -1628,7 +1629,7 @@ Transform:
   m_GameObject: {fileID: 1115977444}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -84.386406, y: -1.708662, z: -46.15521}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0000002, y: 1.0000006, z: 1.0000004}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -2248,7 +2249,7 @@ MonoBehaviour:
   InaccessibleTiles:
   - {fileID: 5225831561217036612, guid: 29c2d978ff921a247be04a590e1da0a2, type: 3}
   Size: {x: 20, y: 15}
-  AccessiblePercentage: 0.1
+  AccessiblePercentage: 0.4
 --- !u!4 &2083344931
 Transform:
   m_ObjectHideFlags: 0

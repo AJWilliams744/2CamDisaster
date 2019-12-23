@@ -28,6 +28,7 @@ public class CameraFollow : MonoBehaviour
     private void Start()
     {
         offset = new Vector3(0, height, 0);
+        
     }
 
     // private Coroutine CamZoomIn;
@@ -40,9 +41,7 @@ public class CameraFollow : MonoBehaviour
 
     //Start follow and set base position and rotation
     public void CameraOn()
-    {
-
-
+    {        
         camFollow = StartCoroutine(StartCamFollow());
         transform.position = mount.transform.position + offset;
 
