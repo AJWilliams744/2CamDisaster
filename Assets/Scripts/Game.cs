@@ -16,6 +16,7 @@ public class Game : MonoBehaviour
     [SerializeField] private CameraFollow camFollowFar;
     [SerializeField] private CameraFollow camFollowClose;
     [SerializeField] private GameObject camObjClose;
+
     [SerializeField] private MenuInteractions menuInteract;
     [SerializeField] private GameObject menuItems;
     [SerializeField] private PostProcessVolume postProcess;
@@ -25,6 +26,7 @@ public class Game : MonoBehaviour
     [SerializeField] private InputHandler inputHandler;
     [SerializeField] private AudioListener mainCamAudio;
     [SerializeField] private GameObject spotLight;
+    [SerializeField] private EnemyHandler enemyHandler;
 
     private RaycastHit[] mRaycastHits;
     private Character mCharacter;
@@ -115,6 +117,7 @@ public class Game : MonoBehaviour
         StartGame();
     }
 
+    //Handle all initializations
     private void StartGame()
     {
         mMap.GenerateWorld();
@@ -135,6 +138,8 @@ public class Game : MonoBehaviour
         directionalLight.intensity = 0;
 
         spotLight.SetActive(true);
+
+        enemyHandler.StartHunt();
 
     }
 

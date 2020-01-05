@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Speeds { stop, medium, fast }
-public class CharacterEnemy : MonoBehaviour
+public class EnemyBody : MonoBehaviour
 {   
-   
-    [SerializeField] private float SingleNodeMoveTime = 0.1f;
+    private float SingleNodeMoveTime = 3f;
+    private float damage = 5f;
+
+    [SerializeField] private EnemyAI AI;
 
     [SerializeField] private AnimationControllerEnemy characterAnimation;
 
@@ -75,6 +77,8 @@ public class CharacterEnemy : MonoBehaviour
                 CurrentPosition = route[count];
                 position = next;
             }
+            //End of route, Trigger New route
+            AI.TriggerArrived();
         }
         
     }
@@ -85,14 +89,7 @@ public class CharacterEnemy : MonoBehaviour
         // that clicks can interupt any current route animation
         StopAllCoroutines();       
         StartCoroutine(DoGoTo(route));
-    }
-
-    public void SetSpeed(Speeds speed)
-    {
-        float movementSpeed = GetSpeed(speed);
-        SingleNodeMoveTime = movementSpeed;
-        characterAnimation.SetSpeed(movementSpeed);
-    }
+    }    
 
     private float GetSpeed(Speeds speed)
     {
@@ -106,6 +103,30 @@ public class CharacterEnemy : MonoBehaviour
                 return 1;
         }
         return 0.1f;
+    }
+
+    //Temp function may use later
+    public void Create(Speeds speed = Speeds.medium, float inDamage = 5f )
+    {
+        SetSpeed(speed);
+        damage = inDamage;        
+    }
+
+    public void SetSpeed(Speeds speed)
+    {
+        float movementSpeed = GetSpeed(speed);
+        SingleNodeMoveTime = 1 / movementSpeed;
+        characterAnimation.SetSpeed(movementSpeed);
+    }
+
+    public void SetDamage(float inDamage)
+    {
+        damage = inDamage;
+    }
+
+    private float GetDamage()
+    {
+        return damage;
     }
 
 }

@@ -240,10 +240,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4041736857787808937}
   - component: {fileID: 6241181508252406227}
-  - component: {fileID: 792252150293316475}
-  - component: {fileID: -2772254617775992073}
   - component: {fileID: 2106154726234106435}
-  - component: {fileID: 591912294469470417}
+  - component: {fileID: -8930582372271332605}
   - component: {fileID: -1756084615454935284}
   m_Layer: 0
   m_Name: Enemy
@@ -293,34 +291,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &792252150293316475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1030334320337571514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83a54eb577d5feb4b9c8795381354de9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SingleNodeMoveTime: 0.5
-  characterAnimation: {fileID: -2772254617775992073}
-  spotLight: {fileID: 0}
---- !u!114 &-2772254617775992073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1030334320337571514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 674daf08bd782d447a83ca82039cddb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animController: {fileID: 6241181508252406227}
 --- !u!114 &2106154726234106435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,8 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2c9c561fd8ec44bb129938a7942f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animController: {fileID: 0}
---- !u!114 &591912294469470417
+  animController: {fileID: 6241181508252406227}
+--- !u!114 &-8930582372271332605
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -346,8 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee48220e0f2db9c489eed4ab80e34080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SingleNodeMoveTime: 0.5
-  characterAnimation: {fileID: 0}
+  AI: {fileID: -1756084615454935284}
+  characterAnimation: {fileID: 2106154726234106435}
 --- !u!114 &-1756084615454935284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86dec7cdcd106641b3a67e36f8e9733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: -8930582372271332605}
 --- !u!1 &1250123887488821385
 GameObject:
   m_ObjectHideFlags: 0

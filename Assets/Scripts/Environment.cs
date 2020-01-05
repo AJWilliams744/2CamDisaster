@@ -429,8 +429,8 @@ public class Environment : MonoBehaviour
     }
 
     public EnvironmentTile GetRandomTile()
-    {
-        return mMap[1][1]; //TODO Return Random Tile
+    {        
+        return mMap[Random.Range(0,Size.x)][Random.Range(0, Size.y)]; //TODO Return Random Tile
     }
 
    
