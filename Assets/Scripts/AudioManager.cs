@@ -12,7 +12,8 @@ public class AudioManager : MonoBehaviour
     private AudioClip JumpScare;
     [SerializeField]
     private AudioClip BigSound;
-
+    [SerializeField]
+    private AudioSource Rain;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class AudioManager : MonoBehaviour
         GameMusic.Play();
         GameMusic.loop = true;
         GameMusic.PlayOneShot(BigSound);
+        Rain.Play();
     }
 
    

@@ -10,7 +10,7 @@ public class EnemyHandler : MonoBehaviour
     [SerializeField]
     private Environment enviroment;
 
-    private int difficulty = 1; // 1-10
+    private int difficulty = 10; // 1-10
 
     public void StartHunt()
     {
