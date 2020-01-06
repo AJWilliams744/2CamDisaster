@@ -10,11 +10,11 @@ public class EnemyHandler : MonoBehaviour
     [SerializeField]
     private Environment enviroment;
 
-    private int difficulty = 10; // 1-10
+    private int enemyCount = 10; // 1-10
 
     public void StartHunt()
     {
-        for (int i = 0; i < difficulty; i++)
+        for (int i = 0; i < enemyCount; i++)
         {
             SpawnEnemy();
         }
@@ -26,5 +26,10 @@ public class EnemyHandler : MonoBehaviour
         GameObject enemy = Instantiate(EnemyPrefab, randomPosition.Position, Quaternion.identity);
         enemy.GetComponent<EnemyAI>().SetMap(enviroment);
         enemy.GetComponent<EnemyBody>().CurrentPosition = randomPosition;
+    }
+
+    public void SetEnemyCount(int inEnemyCount)
+    {
+       enemyCount = inEnemyCount;
     }
 }

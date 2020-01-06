@@ -17,8 +17,7 @@ public class EnemyAI : MonoBehaviour
             List<EnvironmentTile> route = map.Solve(character.CurrentPosition, destination);
 
             character.SetSpeed(Speeds.medium);
-            character.GoTo(route);
-            
+            character.GoTo(route);            
         }
     }
 
