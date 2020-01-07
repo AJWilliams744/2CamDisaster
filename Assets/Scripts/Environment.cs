@@ -9,6 +9,8 @@ public class Environment : MonoBehaviour
     [SerializeField] private Vector2Int Size;
     [SerializeField] private float AccessiblePercentage;
 
+    [SerializeField] private bool TileRotaionFinish = true;
+
     private EnvironmentTile[][] mMap;
     private List<EnvironmentTile> mAll;
     private List<EnvironmentTile> mToBeTested;
@@ -102,7 +104,7 @@ public class Environment : MonoBehaviour
                 if (!isAccessible)
                 {                    
                     //rotate from center of tile
-                    tile.transform.RotateAround(tile.transform.position + new Vector3(5, 0, 5), Vector3.up, GetRandomRotation());
+                    tile.transform.RotateAround(tile.GetRotationBlockPosition(), Vector3.up, GetRandomRotation());
                    // Debug.LogError(tile.transform.eulerAngles.y);
                     //tile.transform.rotation = Quaternion.Euler(new Vector3(0,(int)tile.transform.eulerAngles.y,0));
                 }
@@ -433,5 +435,78 @@ public class Environment : MonoBehaviour
         return mMap[Random.Range(0,Size.x)][Random.Range(0, Size.y)]; //TODO Return Random Tile
     }
 
-   
+    private void RotateAllTiles()
+    {
+        for (int x = 0; x < Size.x; ++x)
+        {
+            for (int y = 0; y < Size.y; ++y)
+            {
+                EnvironmentTile currentTile = mMap[x][y];
+                if (!currentTile.IsAccessible & Random.Range(0,4) < 3)
+                {
+                    //Uses hand made vector for rotation position
+                    // currentTile.transform.RotateAround(currentTile.transform.position + GetRotationPosition(currentTile.transform.eulerAngles.y), Vector3.up, GetRandomRotation());
+
+                    //Uses gameobject - Instant
+                    //currentTile.transform.RotateAround(currentTile.GetRotationBlockPosition(), Vector3.up, GetRandomRotation());
+
+                    //Uses gameobject - OverTime //Random or Set
+                    StartCoroutine(RotateOverTime(currentTile, (int)currentTile.transform.eulerAngles.y + 90));
+
+                }
+            }
+        }
+    }
+
+    //Test Function
+    [SerializeField] private bool RotateTiles;
+    private void Update()
+    {
+        if (RotateTiles)
+        {
+            RotateAllTiles();
+            RotateTiles = false;
+        }
+    }
+
+    
+    //private Vector3 GetRotationPosition(float EulerAngle)
+    //{
+    //    switch (EulerAngle)
+    //    {
+    //        case 0:
+    //            return new Vector3(5, 0, 5);
+    //        case 90:
+    //            return new Vector3(5, 0, -5);
+    //        case 180:
+    //            return new Vector3(-5, 0, -5);
+    //        case 270:
+    //            return new Vector3(-5, 0, 5);
+    //    }
+
+    //    return new Vector3(5,0,5);
+    //}
+
+    private IEnumerator RotateOverTime(EnvironmentTile tile, int rotation)
+    {
+        
+        float roationInterval = 2;
+        if (rotation >= 360) rotation = 0;
+        
+        while (Mathf.RoundToInt(tile.transform.eulerAngles.y) != rotation)
+        {
+            TileRotaionFinish = false;
+            tile.transform.RotateAround(tile.GetRotationBlockPosition(), Vector3.up, roationInterval);
+            yield return new WaitForEndOfFrame();
+        }
+        TileRotaionFinish = true;
+    }
+
+    public bool GetTileRotationStatus()
+    {
+        return TileRotaionFinish;
+    }
+
+
+
 }

@@ -11,4 +11,9 @@ public class EnvironmentTile : MonoBehaviour
     public float Local { get; set; }
     public bool Visited { get; set; }
     public bool IsAccessible { get; set; }
+
+    [SerializeField]
+    private GameObject RotationBlock;
+
+    public Vector3 GetRotationBlockPosition(){ return RotationBlock.transform.position; }
 }

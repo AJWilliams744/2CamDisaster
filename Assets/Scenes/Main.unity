@@ -843,7 +843,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.5904e-41, y: 0, z: 0, w: 2.3832533e+16}
+  m_BoundingSphereOverride: {x: 6.54e-43, y: 1.360284e-39, z: 0, w: 4.8420555e+12}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2770,11 +2770,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccessibleTiles:
-  - {fileID: 5225831561217036612, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
+  - {fileID: 5917980913277252646, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
   InaccessibleTiles:
-  - {fileID: 5225831561217036612, guid: 29c2d978ff921a247be04a590e1da0a2, type: 3}
+  - {fileID: 4483668192784212933, guid: 29c2d978ff921a247be04a590e1da0a2, type: 3}
   Size: {x: 20, y: 15}
   AccessiblePercentage: 0.4
+  TileRotaionFinish: 1
+  RotateTiles: 0
 --- !u!4 &2083344931
 Transform:
   m_ObjectHideFlags: 0

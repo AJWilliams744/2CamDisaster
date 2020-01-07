@@ -82,7 +82,7 @@ public class ChallengeSetter : MonoBehaviour
     // 3 Creatures
     private void Easy()
     {
-        enemyHandler.SetEnemyCount(3); //Child mode, Sometimes life is just too hard
+        enemyHandler.SetEnemyCount(2); //Child mode, Sometimes life is just too hard
        
     }
     //Everything on
