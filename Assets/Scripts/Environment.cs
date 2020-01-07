@@ -9,7 +9,7 @@ public class Environment : MonoBehaviour
     [SerializeField] private Vector2Int Size;
     [SerializeField] private float AccessiblePercentage;
 
-    [SerializeField] private bool TileRotaionFinish = true;
+    private bool TileRotaionFinish = true;
 
     private EnvironmentTile[][] mMap;
     private List<EnvironmentTile> mAll;
@@ -435,7 +435,7 @@ public class Environment : MonoBehaviour
         return mMap[Random.Range(0,Size.x)][Random.Range(0, Size.y)]; //TODO Return Random Tile
     }
 
-    private void RotateAllTiles()
+    public void RotateAllTiles()
     {
         for (int x = 0; x < Size.x; ++x)
         {
@@ -459,15 +459,15 @@ public class Environment : MonoBehaviour
     }
 
     //Test Function
-    [SerializeField] private bool RotateTiles;
-    private void Update()
-    {
-        if (RotateTiles)
-        {
-            RotateAllTiles();
-            RotateTiles = false;
-        }
-    }
+    //[SerializeField] private bool RotateTiles;
+    //private void Update()
+    //{
+    //    if (RotateTiles)
+    //    {
+    //        RotateAllTiles();
+    //        RotateTiles = false;
+    //    }
+    //}
 
     
     //private Vector3 GetRotationPosition(float EulerAngle)
@@ -490,7 +490,7 @@ public class Environment : MonoBehaviour
     private IEnumerator RotateOverTime(EnvironmentTile tile, int rotation)
     {
         
-        float roationInterval = 2;
+        float roationInterval = 0.5f;
         if (rotation >= 360) rotation = 0;
         
         while (Mathf.RoundToInt(tile.transform.eulerAngles.y) != rotation)
@@ -499,11 +499,13 @@ public class Environment : MonoBehaviour
             tile.transform.RotateAround(tile.GetRotationBlockPosition(), Vector3.up, roationInterval);
             yield return new WaitForEndOfFrame();
         }
+        tile.transform.eulerAngles = new Vector3(0, rotation, 0);
         TileRotaionFinish = true;
     }
 
     public bool GetTileRotationStatus()
     {
+    
         return TileRotaionFinish;
     }
 

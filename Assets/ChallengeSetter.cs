@@ -25,6 +25,11 @@ public class ChallengeSetter : MonoBehaviour
         difficulty = inDifficulty;
     }
 
+    public void WorldChanged()
+    {
+        enemyHandler.MapChanged();
+    }
+
     public void StartChallenge()
     {
         Torch = GameObject.Find("TorchLight");

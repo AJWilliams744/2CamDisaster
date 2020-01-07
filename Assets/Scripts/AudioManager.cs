@@ -17,6 +17,8 @@ public class AudioManager : MonoBehaviour
     private AudioSource Insects;
     [SerializeField]
     private AudioSource Wind;
+    [SerializeField]
+    private AudioClip MetalDoor;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +37,11 @@ public class AudioManager : MonoBehaviour
         Insects.Play();
         Wind.Play();
        // Rain.Play();
+    }
+
+    public void PlayMetalDoorSound()
+    {
+        Insects.PlayOneShot(MetalDoor);
     }
 
    

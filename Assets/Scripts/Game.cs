@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -30,6 +31,9 @@ public class Game : MonoBehaviour
     private RaycastHit[] mRaycastHits;
     private Character mCharacter;
     private Environment mMap;
+
+    [SerializeField] private TextMeshProUGUI CounterTextBox;
+    private int CounterLength = 30;
 
     private readonly int NumberOfRaycastHits = 1;
 
@@ -138,7 +142,27 @@ public class Game : MonoBehaviour
 
         //Spawns enemy and handle difficulty 
         challengeSetter.StartChallenge();
+        CounterTextBox.text = CounterLength.ToString();
+       StartCoroutine(StartCountDown());
 
+    }
+
+    private IEnumerator StartCountDown()
+    {
+        while (true)
+        {            
+            int counter = int.Parse(CounterTextBox.text);
+            counter -= 1;
+            if (counter <= -1)
+            {
+                counter = CounterLength;
+                mMap.RotateAllTiles();
+                audioManager.PlayMetalDoorSound();
+                challengeSetter.WorldChanged();
+            }
+            CounterTextBox.text = counter.ToString();
+            yield return new WaitForSeconds(1);
+        }
     }
 
     public void Exit()
