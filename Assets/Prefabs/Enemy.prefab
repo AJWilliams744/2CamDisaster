@@ -378,8 +378,8 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.5
-      value: 1
+      time: 0.60632133
+      value: 0.99334717
       inSlope: -2.0008
       outSlope: -2.0008
       tangentMode: 0
@@ -388,7 +388,7 @@ AudioSource:
       outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 0
+      value: 0.023330688
       inSlope: -0.5002
       outSlope: -0.5002
       tangentMode: 0

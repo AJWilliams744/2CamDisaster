@@ -497,7 +497,7 @@ public class Environment : MonoBehaviour
         {
             TileRotaionFinish = false;
             tile.transform.RotateAround(tile.GetRotationBlockPosition(), Vector3.up, roationInterval);
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.0170022672f);
         }
         tile.transform.eulerAngles = new Vector3(0, rotation, 0);
         TileRotaionFinish = true;
