@@ -134,8 +134,7 @@ public class Character : MonoBehaviour
             t += Time.deltaTime * 1f;
             spotLight.intensity = 1 - (t / 5);
             yield return new WaitForEndOfFrame();
-        }
-        InDarkness();
+        }        
     }    
 
     public void TriggerDeath()
@@ -148,8 +147,5 @@ public class Character : MonoBehaviour
         StartCoroutine(ReduceSpotLight());
     }
 
-    private void InDarkness()
-    {
-        SceneManager.LoadScene(2);
-    }
+    
 }

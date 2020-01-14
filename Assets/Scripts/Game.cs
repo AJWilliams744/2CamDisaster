@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class Game : MonoBehaviour
     [SerializeField] private InputHandler inputHandler;
     [SerializeField] private AudioListener mainCamAudio;
     [SerializeField] private ChallengeSetter challengeSetter;
+
+    [SerializeField] private RawImage screenFad;
 
     private RaycastHit[] mRaycastHits;
     private Character mCharacter;
@@ -186,6 +189,21 @@ public class Game : MonoBehaviour
         inputHandler.SetGameStart(false);
         camFollowFar.ForceStopFollow();
         StopAllCoroutines();
+        StartCoroutine(FadeScreen());
+    }
+
+    private IEnumerator FadeScreen()
+    {
+        float t = 0;
+        while (t < 5)
+        {
+            t += Time.deltaTime * 1f;
+            screenFad.color = new Color(0,0,0, (t / 5));
+            yield return new WaitForEndOfFrame();
+        }
+
+        
+        SceneManager.LoadScene(2);
     }
        
 
