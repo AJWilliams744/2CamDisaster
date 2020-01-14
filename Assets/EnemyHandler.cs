@@ -36,6 +36,35 @@ public class EnemyHandler : MonoBehaviour
         AllEnemies.Add(enemy);
     }
 
+    public void ResetAllEnemy()
+    {
+       foreach(GameObject enemy in AllEnemies)
+       {
+            ResetEnemy(enemy);
+       }
+    }
+
+    public void DestroyAllEnemies()
+    {
+        if (AllEnemies != null)
+        {
+
+
+            foreach (GameObject enemy in AllEnemies)
+            {
+                GameObject.Destroy(enemy);
+            }
+        }
+    }
+
+    private void ResetEnemy(GameObject enemy)
+    {
+        EnvironmentTile randomPosition = enviroment.GetRandomTile();
+        enemy.transform.position = randomPosition.Position;
+        enemy.GetComponent<EnemyAI>().SetMap(enviroment);
+        enemy.GetComponent<EnemyBody>().CurrentPosition = randomPosition;
+    }
+
     public void SetEnemyCount(int inEnemyCount)
     {
        enemyCount = inEnemyCount;

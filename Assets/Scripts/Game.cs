@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.PostProcessing;
 
 public class Game : MonoBehaviour
@@ -72,6 +72,8 @@ public class Game : MonoBehaviour
                 }
             }
         }
+        // if (Input.GetKeyDown(KeyCode.Escape)) ShowMenu(true); // To many resets, should be a seperate scene
+        if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene(SceneManager.sceneCount); //TODO dont be so lazy with this
     }
 
     public void ShowMenu(bool show)
@@ -86,6 +88,7 @@ public class Game : MonoBehaviour
                 mCharacter.transform.position = CharacterStart.position;
                 mCharacter.transform.rotation = CharacterStart.rotation;
                 mMap.CleanUpWorld();
+               // challengeSetter.Destroy(); May use later
             }
             else
             {
@@ -120,6 +123,19 @@ public class Game : MonoBehaviour
         StartGame();
     }
 
+    private IEnumerator ReversePostProcessBlend()
+    {
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.deltaTime * 1f;
+            postProcess.weight = 1 - t;
+            yield return new WaitForEndOfFrame();
+
+        }
+       
+    }
+
     //Handle all initializations
     private void StartGame()
     {
@@ -143,7 +159,7 @@ public class Game : MonoBehaviour
         //Spawns enemy and handle difficulty 
         challengeSetter.StartChallenge();
         CounterTextBox.text = CounterLength.ToString();
-       StartCoroutine(StartCountDown());
+        StartCoroutine(StartCountDown());
 
     }
 
@@ -164,6 +180,14 @@ public class Game : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
     }
+
+    public void IAmDead()
+    {
+        inputHandler.SetGameStart(false);
+        camFollowFar.ForceStopFollow();
+        StopAllCoroutines();
+    }
+       
 
     public void Exit()
     {

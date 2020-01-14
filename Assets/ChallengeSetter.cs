@@ -30,6 +30,16 @@ public class ChallengeSetter : MonoBehaviour
         enemyHandler.MapChanged();
     }
 
+    public void Reset()
+    {
+        enemyHandler.ResetAllEnemy();
+    }
+
+    public void Destroy()
+    {
+        enemyHandler.DestroyAllEnemies();
+    }
+
     public void StartChallenge()
     {
         Torch = GameObject.Find("TorchLight");

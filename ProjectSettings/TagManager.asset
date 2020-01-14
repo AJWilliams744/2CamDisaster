@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - RotationBlock
+  - Torch
+  - Enemy
+  - Game
   layers:
   - Default
   - TransparentFX

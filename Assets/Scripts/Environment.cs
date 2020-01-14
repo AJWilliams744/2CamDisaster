@@ -6,7 +6,13 @@ public class Environment : MonoBehaviour
 {
     [SerializeField] private List<EnvironmentTile> AccessibleTiles;
     [SerializeField] private List<EnvironmentTile> InaccessibleTiles;
-    [SerializeField] private Vector2Int Size;
+    
+    [Range(15,50)]
+    [SerializeField] private int SizeX;
+    [Range(15, 50)]
+    [SerializeField] private int SizeY;
+    private Vector2Int Size;
+
     [SerializeField] private float AccessiblePercentage;
 
     private bool TileRotaionFinish = true;
@@ -31,6 +37,8 @@ public class Environment : MonoBehaviour
     {
         mAll = new List<EnvironmentTile>();
         mToBeTested = new List<EnvironmentTile>();
+
+        Size = new Vector2Int(SizeX, SizeY);
        
     }
 
@@ -497,7 +505,7 @@ public class Environment : MonoBehaviour
         {
             TileRotaionFinish = false;
             tile.transform.RotateAround(tile.GetRotationBlockPosition(), Vector3.up, roationInterval);
-            yield return new WaitForSeconds(0.0170022672f);
+            yield return new WaitForSeconds(0.0170022672f); // TODO probably should change this
         }
         tile.transform.eulerAngles = new Vector3(0, rotation, 0);
         TileRotaionFinish = true;

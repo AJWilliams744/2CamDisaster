@@ -1,18 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
+
+    private Game game;
+
     [SerializeField] private float SingleNodeMoveTime = 0.5f;
 
     [SerializeField] private AnimationController characterAnimation;
 
-    [SerializeField] private GameObject spotLight;
+    [SerializeField] private GameObject spotLightObj;
+
+    [SerializeField] private Light spotLight;
 
     private Coroutine turnCoroutine;
 
     public EnvironmentTile CurrentPosition { get; set; }
+
+    private bool IAmDead = false;
+
+    private void Start()
+    {
+        game = GameObject.FindGameObjectWithTag("Game").GetComponent<Game>();
+    }
 
     private IEnumerator DoMove(Vector3 position, Vector3 destination)
     {
@@ -84,8 +97,11 @@ public class Character : MonoBehaviour
         // Clear all coroutines before starting the new route so 
         // that clicks can interupt any current route animation
         StopAllCoroutines();
-        characterAnimation.SetWalking(true);
-        StartCoroutine(DoGoTo(route));
+        if (!IAmDead)
+        {
+            characterAnimation.SetWalking(true);
+            StartCoroutine(DoGoTo(route));
+        }
         
     }
 
@@ -107,6 +123,33 @@ public class Character : MonoBehaviour
 
     private void SetSpotLight(bool value)
     {
-        spotLight.SetActive(value);
+        spotLightObj.SetActive(value);
+    }
+
+    private IEnumerator ReduceSpotLight()
+    {
+        float t = 0;
+        while (t < 5)
+        {
+            t += Time.deltaTime * 1f;
+            spotLight.intensity = 1 - (t / 5);
+            yield return new WaitForEndOfFrame();
+        }
+        InDarkness();
+    }    
+
+    public void TriggerDeath()
+    {
+        StopAllCoroutines();
+        characterAnimation.TriggerHit();
+        game.IAmDead();
+        IAmDead = true;
+
+        StartCoroutine(ReduceSpotLight());
+    }
+
+    private void InDarkness()
+    {
+        SceneManager.LoadScene(2);
     }
 }

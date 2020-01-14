@@ -843,7 +843,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 1.16e-43, w: 0.125}
+  m_BoundingSphereOverride: {x: -0.0390625, y: 0, z: 9, w: 8}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -945,7 +945,7 @@ GameObject:
   - component: {fileID: 896303075}
   m_Layer: 0
   m_Name: Game
-  m_TagString: Untagged
+  m_TagString: Game
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2931,7 +2931,8 @@ MonoBehaviour:
   - {fileID: 5917980913277252646, guid: 068b00b1b45e14e49a33d5ab4dc954a2, type: 3}
   InaccessibleTiles:
   - {fileID: 4483668192784212933, guid: 29c2d978ff921a247be04a590e1da0a2, type: 3}
-  Size: {x: 20, y: 15}
+  SizeX: 15
+  SizeY: 20
   AccessiblePercentage: 0.4
 --- !u!4 &2083344931
 Transform:

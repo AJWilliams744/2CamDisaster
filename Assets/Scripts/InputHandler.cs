@@ -16,6 +16,11 @@ public class InputHandler : MonoBehaviour
         gameStart = true;
     }
 
+    public void SetGameStart(bool inBool)
+    {
+        gameStart = inBool;
+    }
+
     // Update is called once per frame
     void Update()
     {

@@ -9,15 +9,26 @@ public class EnemyAI : MonoBehaviour
 
     private bool atDestination = true;
 
-    private void StartMove()
+    private bool PlayerCaught = false;
+
+    private void StartMove(bool forcedSpeed)
     {
         EnvironmentTile destination = map.GetRandomTile();
         if (destination != null)
         {
             List<EnvironmentTile> route = map.Solve(character.CurrentPosition, destination);
 
-            character.SetSpeed(Speeds.medium);
-            character.GoTo(route);            
+            if (!forcedSpeed)
+            {
+                character.SetSpeed(GetRandomSpeed());
+                character.GoTo(route);
+            }
+            else
+            {
+                character.SetSpeed(Speeds.fast);
+                character.GoTo(route);
+            }
+                  
         }
     }
 
@@ -25,7 +36,15 @@ public class EnemyAI : MonoBehaviour
     {
         if (atDestination)
         {
-            StartMove();
+            if (PlayerCaught)
+            {
+                StartMove(true);
+            }
+            else
+            {
+                StartMove(false);
+            }
+            
             atDestination = false;
         }
     }
@@ -34,20 +53,46 @@ public class EnemyAI : MonoBehaviour
     public void TriggerArrived()
     {        //wait 5 seconds then move on
         character.SetSpeed(Speeds.stop);
-        StartCoroutine(FunctionTimmer(StartMove, 5));
+        if (PlayerCaught)
+        {
+            StartCoroutine(FunctionTimmer(StartMove,0, PlayerCaught));
+        }
+        else
+        {
+            StartCoroutine(FunctionTimmer(StartMove, 5, PlayerCaught));
+        }
+        
+    }
+
+    public void TriggerPlayerCaught()
+    {        
+        PlayerCaught = true;
+        TriggerArrived();
+    }
+
+    private Speeds GetRandomSpeed()
+    {
+        if(Random.Range(0,10) < 7)
+        {
+            return Speeds.medium;
+        }
+        else
+        {
+            return Speeds.fast;
+        }
     }
 
     
     //Do function after timmer is up
-    private IEnumerator FunctionTimmer(MyDelegate function, int delay)
+    private IEnumerator FunctionTimmer(MyDelegate function, int delay, bool forced)
     {
         yield return new WaitForSeconds(delay);
-        function();
+        function(forced);
         Debug.Log("New Route Started");
     }
 
     //Used for timmer
-    delegate void MyDelegate();
+    delegate void MyDelegate(bool forced);
     
 
     public void SetMap(Environment inMap)
