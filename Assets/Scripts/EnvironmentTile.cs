@@ -11,9 +11,25 @@ public class EnvironmentTile : MonoBehaviour
     public float Local { get; set; }
     public bool Visited { get; set; }
     public bool IsAccessible { get; set; }
+    public bool IsDoor { get; set; }
 
-    [SerializeField]
-    private GameObject RotationBlock;
+    [SerializeField] private Animator animControl;
 
+
+    [SerializeField] private GameObject RotationBlock;
+
+    [SerializeField] private GameObject Wall;
+    [SerializeField] private GameObject Door;
+
+    public void SetDoorOn()
+    {
+        IsDoor = true;
+        Wall.SetActive(false);
+        Door.SetActive(true);
+    }
+    public void TriggerDoorRotation()
+    {
+        animControl.SetTrigger("Open");
+    }
     public Vector3 GetRotationBlockPosition(){ return RotationBlock.transform.position; }
 }

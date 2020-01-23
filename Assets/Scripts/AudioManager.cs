@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class AudioManager : MonoBehaviour
     private AudioSource Wind;
     [SerializeField]
     private AudioClip MetalDoor;
+    [SerializeField]
+    private AudioClip ZombieBite;
+
+    [SerializeField]
+    private AudioMixer masterAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +48,16 @@ public class AudioManager : MonoBehaviour
     public void PlayMetalDoorSound()
     {
         Insects.PlayOneShot(MetalDoor);
+    }
+
+    public void SetMasterVolume(float inValue)
+    {
+        masterAudio.SetFloat("Volume", inValue);
+    }
+
+    public void PlayDeath()
+    {
+        Insects.PlayOneShot(ZombieBite);
     }
 
    

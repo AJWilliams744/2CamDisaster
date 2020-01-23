@@ -35,6 +35,8 @@ public class InputHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D)) HandleRightFace();
         if (Input.GetKeyDown(KeyCode.W)) HandleForwardFace();
         if (Input.GetKeyDown(KeyCode.S)) HandleBackFace();
+        if (Input.GetKeyDown(KeyCode.E)) HandleEPress();
+        if (Input.GetKeyDown(KeyCode.T)) SwitchTorch();
 
         if (Input.GetMouseButton(1))
         {
@@ -74,5 +76,15 @@ public class InputHandler : MonoBehaviour
     private void HandleCameraStop()
     {
         MainCamFollow.StopFollow();
+    }
+
+    private void HandleEPress()
+    {
+        characterController.HandleDoorPress();
+    }
+
+    private void SwitchTorch()
+    {
+        characterController.SwitchTorch();
     }
 }

@@ -95,9 +95,9 @@ public class Game : MonoBehaviour
             }
             else
             {
-                mCharacter.transform.position = mMap.Start.Position;
+                mCharacter.transform.position = mMap.StartTile.Position;
                 mCharacter.transform.rotation = Quaternion.identity;
-                mCharacter.CurrentPosition = mMap.Start;
+                mCharacter.CurrentPosition = mMap.StartTile;
             }
         }
     }
@@ -184,26 +184,28 @@ public class Game : MonoBehaviour
         }
     }
 
-    public void IAmDead()
+    public void IAmDead(int sceneLoad)
     {
         inputHandler.SetGameStart(false);
         camFollowFar.ForceStopFollow();
         StopAllCoroutines();
-        StartCoroutine(FadeScreen());
+        audioManager.PlayDeath();
+        StartCoroutine(FadeScreen(sceneLoad));
     }
 
-    private IEnumerator FadeScreen()
+    private IEnumerator FadeScreen(int sceneLoad)
     {
         float t = 0;
-        while (t < 5)
+        while (t < 8)
         {
             t += Time.deltaTime * 1f;
-            screenFad.color = new Color(0,0,0, (t / 5));
+            screenFad.color = new Color(0,0,0, (t / 4));
+            audioManager.SetMasterVolume(-t * 6);
             yield return new WaitForEndOfFrame();
         }
 
         
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(sceneLoad);
     }
        
 

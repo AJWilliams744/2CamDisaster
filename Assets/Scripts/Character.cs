@@ -141,11 +141,42 @@ public class Character : MonoBehaviour
     {
         StopAllCoroutines();
         characterAnimation.TriggerHit();
-        game.IAmDead();
+        game.IAmDead(2);
         IAmDead = true;
 
         StartCoroutine(ReduceSpotLight());
     }
 
+    public void HandleDoorPress()
+    {
+        if (!CurrentPosition.IsDoor) return;
+        if (turnCoroutine != null) StopCoroutine(turnCoroutine);
+        Vector3 newRotation = this.transform.localEulerAngles;
+
+        newRotation.y = CurrentPosition.transform.localEulerAngles.y;
+
+        this.transform.localEulerAngles = newRotation;
+
+        CurrentPosition.TriggerDoorRotation();
+        StopAllCoroutines();
+        game.IAmDead(3);
+        //GetLookDirection();
+    }
+    public void SwitchTorch()
+    {
+        spotLightObj.SetActive(!spotLightObj.activeSelf); 
+    }
+
+    //private void GetLookDirection()
+    //{
+    //    float currentRot = this.transform.eulerAngles.y;
+    //    float tileRot = this.transform.eulerAngles.y;
+    //}
+
+    ////Get in under 360
+    //private void FixEulerAngle(float inAngle)
+    //{
+
+    //}
     
 }

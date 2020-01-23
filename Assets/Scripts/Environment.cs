@@ -14,6 +14,7 @@ public class Environment : MonoBehaviour
     private Vector2Int Size;
 
     [SerializeField] private float AccessiblePercentage;
+    [SerializeField] private float DoorChance;
 
     private bool TileRotaionFinish = true;
 
@@ -31,7 +32,10 @@ public class Environment : MonoBehaviour
     private Vector3 directionForward = new Vector3(0, 0, -10);
     private Vector3 directionBack = new Vector3(0, 0, 10);
 
-    public EnvironmentTile Start { get; private set; }
+    private int[] puzzleNumbers;
+    private int puzzleNumbersCount = 4;
+
+    public EnvironmentTile StartTile { get; private set; }
 
     private void Awake()
     {
@@ -40,6 +44,17 @@ public class Environment : MonoBehaviour
 
         Size = new Vector2Int(SizeX, SizeY);
        
+    }
+
+    private void Start()
+    {
+        puzzleNumbers = new int[4];
+
+        for (int i = 0; i < puzzleNumbersCount; i++)
+        {
+            puzzleNumbers[i] = Random.Range(0, 10);
+            //Debug.LogError(puzzleNumbers[i]);
+        }
     }
 
     private void OnDrawGizmos()
@@ -110,7 +125,8 @@ public class Environment : MonoBehaviour
                 tile.IsAccessible = isAccessible;
 
                 if (!isAccessible)
-                {                    
+                {
+                    if (Random.value < DoorChance) tile.SetDoorOn();
                     //rotate from center of tile
                     tile.transform.RotateAround(tile.GetRotationBlockPosition(), Vector3.up, GetRandomRotation());
                    // Debug.LogError(tile.transform.eulerAngles.y);
@@ -123,7 +139,7 @@ public class Environment : MonoBehaviour
 
                 if(start)
                 {
-                    Start = tile;
+                    StartTile = tile;
                 }
 
                 position.z += TileSize;
@@ -440,7 +456,7 @@ public class Environment : MonoBehaviour
 
     public EnvironmentTile GetRandomTile()
     {        
-        return mMap[Random.Range(0,Size.x)][Random.Range(0, Size.y)]; //TODO Return Random Tile
+        return mMap[Random.Range(0,Size.x)][Random.Range(0, Size.y)]; 
     }
 
     public void RotateAllTiles()

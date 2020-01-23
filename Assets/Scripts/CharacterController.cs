@@ -28,5 +28,15 @@ public class CharacterController : MonoBehaviour
         character = inCharacter;
     }
 
+    public void HandleDoorPress()
+    {
+        character.HandleDoorPress();
+    }
+
+    public void SwitchTorch()
+    {
+        character.SwitchTorch();
+    }
+
    
 }
