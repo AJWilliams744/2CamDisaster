@@ -75,7 +75,7 @@ public class ChallengeSetter : MonoBehaviour
             case Difficulty.Medium:
 
                 difficulty = Difficulty.Hard;
-                difficultyText.text = diffcultyBase + "\n[Hard] Forgetful Insomia, as it should be played";
+                difficultyText.text = diffcultyBase + "\n[Hard] Watchful Insomia, as it should be played";
                 PlayerPrefs.SetInt("Challenge", 1);
 
                 break;
