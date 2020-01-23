@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
             {
                
                 WonGame = true;
+                
             }
             
                

@@ -15,6 +15,9 @@ public class AudioManager : MonoBehaviour
     private AudioClip BigSound;
 
     [SerializeField]
+    private AudioSource BackgroundMusic;
+
+    [SerializeField]
     private AudioSource Insects;
     [SerializeField]
     private AudioSource Wind;
@@ -29,7 +32,11 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        BackgroundMusic.Play();
+        Cursor.lockState = CursorLockMode.None;
         
+        Cursor.visible = true;
+        masterAudio.SetFloat("Volume", 0);
     }
 
     public void StartGameMusic()

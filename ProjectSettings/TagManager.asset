@@ -8,6 +8,8 @@ TagManager:
   - Torch
   - Enemy
   - Game
+  - Fire
+  - Wall
   layers:
   - Default
   - TransparentFX

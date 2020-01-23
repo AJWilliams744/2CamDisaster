@@ -42,6 +42,7 @@ public class Game : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = true;
         mRaycastHits = new RaycastHit[NumberOfRaycastHits];
         mMap = GetComponentInChildren<Environment>();
         mCharacter = Instantiate(Character, transform);
