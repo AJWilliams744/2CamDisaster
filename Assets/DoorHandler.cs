@@ -21,6 +21,11 @@ public class DoorHandler : MonoBehaviour
 
         pedistalText.text = total.ToString();
         pedistalText.outlineWidth = 0.1f;
+
+        if(PlayerPrefs.GetInt("Challenge") == 1 || PlayerPrefs.GetInt("Challenge") == 2)
+        {
+            pedistalText.gameObject.SetActive(false);
+        }
     }
 
     public bool AddNumber(int inValue)

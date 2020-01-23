@@ -70,24 +70,27 @@ public class ChallengeSetter : MonoBehaviour
 
                 difficulty = Difficulty.Medium;
                 difficultyText.text = diffcultyBase + "\n[Medium] Trial Run, I think I need to practice first";
-
+                PlayerPrefs.SetInt("Challenge", 0);
                 break;
             case Difficulty.Medium:
 
                 difficulty = Difficulty.Hard;
                 difficultyText.text = diffcultyBase + "\n[Hard] Forgetful Insomia, as it should be played";
+                PlayerPrefs.SetInt("Challenge", 1);
 
                 break;
             case Difficulty.Hard:
 
                 difficulty = Difficulty.Extreme;
                 difficultyText.text = diffcultyBase + "\n[Extreme] Darkness is my friend";
+                PlayerPrefs.SetInt("Challenge", 2);
 
                 break;
             case Difficulty.Extreme:
 
                 difficulty = Difficulty.Easy;
                 difficultyText.text = diffcultyBase + "\n[Easy] Child mode, Sometimes life is just too hard";
+                PlayerPrefs.SetInt("Challenge", 0);
 
                 break;
         }

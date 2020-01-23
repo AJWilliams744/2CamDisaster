@@ -127,7 +127,7 @@ public class Environment : MonoBehaviour
 
                 if (!isAccessible)
                 {
-                    if (Random.value < DoorChance) tile.SetDoorOn();
+                    //if (Random.value < DoorChance) tile.SetDoorOn();
                     //rotate from center of tile
                     tile.transform.RotateAround(tile.GetRotationBlockPosition(), Vector3.up, GetRandomRotation());
                    // Debug.LogError(tile.transform.eulerAngles.y);
@@ -230,9 +230,18 @@ public class Environment : MonoBehaviour
     {
         Generate();
         SetupConnections();
+
        
     }
 
+    private void SetDoors()
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            GetRandomTile().SetDoorOn();
+        }
+       
+    }
     public void CleanUpWorld()
     {
         if (mMap != null)

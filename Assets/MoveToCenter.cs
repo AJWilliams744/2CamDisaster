@@ -19,8 +19,14 @@ public class MoveToCenter : MonoBehaviour
 
     private IEnumerator MoveToCenterOverTime()
     {
+        float time = 90;
+
+        if (PlayerPrefs.GetInt("Challenge") == 2) time = 60;
+        if (PlayerPrefs.GetInt("Challenge") == 1) time = 90;
+        if (PlayerPrefs.GetInt("Challenge") == 0) time = 120;
+
         float t = 0;
-        float time = 120;
+        
         while (t < time)
         {
             t += Time.deltaTime * 1f;

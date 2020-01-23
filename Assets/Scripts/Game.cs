@@ -42,6 +42,7 @@ public class Game : MonoBehaviour
 
     void Start()
     {
+        CounterTextBox.outlineWidth = 0.1f;
         Cursor.visible = true;
         mRaycastHits = new RaycastHit[NumberOfRaycastHits];
         mMap = GetComponentInChildren<Environment>();
@@ -77,7 +78,7 @@ public class Game : MonoBehaviour
             }
         }
         // if (Input.GetKeyDown(KeyCode.Escape)) ShowMenu(true); // To many resets, should be a seperate scene
-        if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene(SceneManager.sceneCount); //TODO dont be so lazy with this
+        if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene(0); //TODO dont be so lazy with this
     }
 
     public void ShowMenu(bool show)
@@ -190,7 +191,7 @@ public class Game : MonoBehaviour
         inputHandler.SetGameStart(false);
         camFollowFar.ForceStopFollow();
         StopAllCoroutines();
-        audioManager.PlayDeath();
+        audioManager.PlayDeath(sceneLoad);
         StartCoroutine(FadeScreen(sceneLoad));
     }
 

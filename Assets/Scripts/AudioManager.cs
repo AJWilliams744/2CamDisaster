@@ -22,9 +22,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private AudioSource Wind;
     [SerializeField]
-    private AudioClip MetalDoor;
+    private AudioClip MetalDoor;    
     [SerializeField]
-    private AudioClip ZombieBite;
+    private AudioSource ZombieBite;
 
     [SerializeField]
     private AudioMixer masterAudio;
@@ -62,9 +62,17 @@ public class AudioManager : MonoBehaviour
         masterAudio.SetFloat("Volume", inValue);
     }
 
-    public void PlayDeath()
+    public void PlayDeath(int sceneLoad)
     {
-        Insects.PlayOneShot(ZombieBite);
+        if(sceneLoad == 2)
+        {
+            ZombieBite.Play();
+        }
+        else
+        {
+            PlayMetalDoorSound();
+        }
+        
     }
 
    
