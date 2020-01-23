@@ -39,6 +39,7 @@ public class Environment : MonoBehaviour
 
     private void Awake()
     {
+       
         mAll = new List<EnvironmentTile>();
         mToBeTested = new List<EnvironmentTile>();
 
@@ -53,7 +54,7 @@ public class Environment : MonoBehaviour
         for (int i = 0; i < puzzleNumbersCount; i++)
         {
             puzzleNumbers[i] = Random.Range(0, 10);
-            //Debug.LogError(puzzleNumbers[i]);
+            PlayerPrefs.SetInt(i.ToString(), puzzleNumbers[i]);
         }
     }
 

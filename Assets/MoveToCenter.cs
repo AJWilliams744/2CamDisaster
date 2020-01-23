@@ -20,7 +20,7 @@ public class MoveToCenter : MonoBehaviour
     private IEnumerator MoveToCenterOverTime()
     {
         float t = 0;
-        float time = 60;
+        float time = 120;
         while (t < time)
         {
             t += Time.deltaTime * 1f;
