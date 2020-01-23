@@ -25,6 +25,8 @@ public class AudioManager : MonoBehaviour
     private AudioClip MetalDoor;    
     [SerializeField]
     private AudioSource ZombieBite;
+    [SerializeField]
+    private AudioSource KeyFoundAudio;
 
     [SerializeField]
     private AudioMixer masterAudio;
@@ -73,6 +75,11 @@ public class AudioManager : MonoBehaviour
             PlayMetalDoorSound();
         }
         
+    }
+
+    public void KeyFound()
+    {
+        KeyFoundAudio.Play();
     }
 
    

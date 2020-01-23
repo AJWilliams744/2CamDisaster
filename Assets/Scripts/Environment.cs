@@ -6,6 +6,9 @@ public class Environment : MonoBehaviour
 {
     [SerializeField] private List<EnvironmentTile> AccessibleTiles;
     [SerializeField] private List<EnvironmentTile> InaccessibleTiles;
+
+    [SerializeField] private GameObject pedistalPrefab;
+    [SerializeField] private GameObject keyPrefab;
     
     [Range(15,50)]
     [SerializeField] private int SizeX;
@@ -35,6 +38,9 @@ public class Environment : MonoBehaviour
     private int[] puzzleNumbers;
     private int puzzleNumbersCount = 4;
 
+    private int DoorCount = 0;
+    private int MaxDoorCount = 0;
+
     public EnvironmentTile StartTile { get; private set; }
 
     private void Awake()
@@ -50,12 +56,75 @@ public class Environment : MonoBehaviour
     private void Start()
     {
         puzzleNumbers = new int[4];
-
+        MaxDoorCount = PlayerPrefs.GetInt("Challenge");
+        
         for (int i = 0; i < puzzleNumbersCount; i++)
         {
             puzzleNumbers[i] = Random.Range(0, 10);
             PlayerPrefs.SetInt(i.ToString(), puzzleNumbers[i]);
+           // Debug.LogError(i + " : " + puzzleNumbers[i]);
         }
+    }
+
+    private void GetMaxDoorCount()
+    {
+        int challenge = PlayerPrefs.GetInt("Challenge");
+
+        switch (challenge)
+        {
+            case 0:
+                MaxDoorCount = 5;
+                break;
+            case 1:
+                MaxDoorCount = 3;
+                break;
+            case 2:
+                MaxDoorCount = 1;
+                break;
+        }
+    }
+
+    private void SetAllDoors()
+    {
+        
+        EnvironmentTile tempTile = GetRandomTile();
+           
+        if (tempTile.IsAccessible)
+        {
+            SetAllDoors();
+        }
+        else
+        {
+            tempTile.SetDoorOn();
+           // Debug.LogError(tempTile.name);
+            tempTile.SetTextVisibilty(false);
+            DoorCount++;
+
+            if (!(MaxDoorCount - DoorCount < 1)) SetAllDoors();
+
+
+        }            
+        
+    }
+
+    private void SetAllPedistals()
+    {
+        EnvironmentTile tempTile;
+        for (int i = 0; i < puzzleNumbersCount; i++)
+        {
+             tempTile = GetRandomTile();
+            //Debug.LogError(tempTile.name);
+
+            GameObject obj = Instantiate(pedistalPrefab, tempTile.transform);
+            TMPro.TextMeshPro text = obj.GetComponentInChildren<TMPro.TextMeshPro>();
+            text.outlineWidth = 0.1f;
+            text.text = puzzleNumbers[i].ToString();
+        }
+
+        tempTile = GetRandomTile();
+       // Debug.LogError(tempTile.name);
+        Instantiate(keyPrefab, tempTile.transform);
+
     }
 
     private void OnDrawGizmos()
@@ -230,18 +299,11 @@ public class Environment : MonoBehaviour
     {
         Generate();
         SetupConnections();
-
-       
+        GetMaxDoorCount();
+        SetAllDoors();
+        SetAllPedistals();
     }
-
-    private void SetDoors()
-    {
-        for(int i = 0; i < 4; i++)
-        {
-            GetRandomTile().SetDoorOn();
-        }
-       
-    }
+    
     public void CleanUpWorld()
     {
         if (mMap != null)

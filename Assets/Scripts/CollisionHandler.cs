@@ -19,5 +19,12 @@ public class CollisionHandler : MonoBehaviour
             other.gameObject.GetComponent<EnemyAI>().TriggerPlayerCaught();
         }
         
+        if(other.tag == "Key")
+        {
+            character.SetHasKey(true);
+           // Debug.LogError("I Have Key");
+            other.gameObject.SetActive(false);
+        }
+        
     }
 }

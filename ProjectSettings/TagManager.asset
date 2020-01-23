@@ -10,6 +10,7 @@ TagManager:
   - Game
   - Fire
   - Wall
+  - Key
   layers:
   - Default
   - TransparentFX

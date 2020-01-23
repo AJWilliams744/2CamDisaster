@@ -28,6 +28,7 @@ public class Game : MonoBehaviour
     [SerializeField] private InputHandler inputHandler;
     [SerializeField] private AudioListener mainCamAudio;
     [SerializeField] private ChallengeSetter challengeSetter;
+    [SerializeField] private GameObject HintFade;
 
     [SerializeField] private RawImage screenFad;
 
@@ -39,6 +40,7 @@ public class Game : MonoBehaviour
     private int CounterLength = 30;
 
     private readonly int NumberOfRaycastHits = 1;
+    private bool GameStart = false;
 
     void Start()
     {
@@ -78,7 +80,13 @@ public class Game : MonoBehaviour
             }
         }
         // if (Input.GetKeyDown(KeyCode.Escape)) ShowMenu(true); // To many resets, should be a seperate scene
-        if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene(0); //TODO dont be so lazy with this
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(GameStart) SceneManager.LoadScene(2);
+            Application.Quit();
+        } //TODO dont be so lazy with this
+
+        if (Input.GetKeyDown(KeyCode.G)) SceneManager.LoadScene(3);
     }
 
     public void ShowMenu(bool show)
@@ -109,7 +117,7 @@ public class Game : MonoBehaviour
 
         audioManager.StartGameMusic();
         //mMap.GenerateWorld();
-
+        
         StartCoroutine(PostProcessBlend());
 
        
@@ -144,6 +152,7 @@ public class Game : MonoBehaviour
     //Handle all initializations
     private void StartGame()
     {
+        GameStart = true;
         mMap.GenerateWorld();
         ShowMenu(false);
 
@@ -165,6 +174,8 @@ public class Game : MonoBehaviour
         challengeSetter.StartChallenge();
         CounterTextBox.text = CounterLength.ToString();
         StartCoroutine(StartCountDown());
+
+        HintFade.SetActive(true);
 
     }
 
@@ -208,6 +219,11 @@ public class Game : MonoBehaviour
 
         
         SceneManager.LoadScene(sceneLoad);
+    }
+
+    public void FoundKey()
+    {
+        audioManager.KeyFound();
     }
        
 

@@ -23,9 +23,15 @@ public class EnvironmentTile : MonoBehaviour
 
     public void SetDoorOn()
     {
+       // Debug.LogError(gameObject.name);
         IsDoor = true;
         Wall.SetActive(false);
         Door.SetActive(true);
+    }
+
+    public void SetTextVisibilty(bool inValue)
+    {
+        Door.GetComponentInChildren<DoorAnimator>().SetTextVisibilty(inValue);
     }
     public void TriggerDoorRotation()
     {

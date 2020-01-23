@@ -53,4 +53,9 @@ public class DoorAnimator : MonoBehaviour
     {
         portal.color = inColour;
     }
+
+    public void SetTextVisibilty(bool inValue)
+    {
+        text.gameObject.SetActive(inValue);
+    }
 }

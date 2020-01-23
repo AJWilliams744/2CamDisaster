@@ -22,9 +22,17 @@ public class Character : MonoBehaviour
 
     private bool IAmDead = false;
 
+    private bool HasKey = false;
+
     private void Start()
     {
         game = GameObject.FindGameObjectWithTag("Game").GetComponent<Game>();
+    }
+
+    public void SetHasKey(bool inValue)
+    {
+        game.FoundKey();
+        HasKey = inValue;
     }
 
     private IEnumerator DoMove(Vector3 position, Vector3 destination)
@@ -150,6 +158,7 @@ public class Character : MonoBehaviour
     public void HandleDoorPress()
     {
         if (!CurrentPosition.IsDoor) return;
+        if (!HasKey) return;
         if (turnCoroutine != null) StopCoroutine(turnCoroutine);
         Vector3 newRotation = this.transform.localEulerAngles;
 
