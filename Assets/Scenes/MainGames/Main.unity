@@ -913,7 +913,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 4e-45, z: 4.895e-42, w: 1.05e-43}
+  m_BoundingSphereOverride: {x: 1e-45, y: 0, z: 6e-45, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1751,7 +1751,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The sum of 4 Numbers and 1 Key  Don't Forget
+  m_text: "The answer is the sum of 4 Numbers and 1 Key \nDon't Forget"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3023,7 +3023,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 5c4c44328c8796c42b80f105587afa7c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0

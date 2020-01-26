@@ -9,12 +9,15 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //TODO - DEATH!!
-        if(other.gameObject.tag == "Wall") SceneManager.LoadScene(2);        
+        if(other.gameObject.tag == "Wall") SceneManager.LoadScene(5);        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (WonGame && (collision.gameObject.tag == "Fire" || collision.gameObject.tag == "Finish")) SceneManager.LoadScene(2);
+        if (WonGame && (collision.gameObject.tag == "Fire" || collision.gameObject.tag == "Finish"))
+        {
+            SceneManager.LoadScene(6);
+        }
     }
 
     private void Update()
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
         {
             HandleDoorOpen();
         }
+        if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene(5);
     }
 
     private void HandleDoorOpen()
@@ -39,10 +43,7 @@ public class PlayerController : MonoBehaviour
                
                 WonGame = true;
                 
-            }
-            
-               
-               
+            }    
             
         }
             

@@ -66,7 +66,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayDeath(int sceneLoad)
     {
-        if(sceneLoad == 2)
+        if(sceneLoad == 5)
         {
             ZombieBite.Play();
         }

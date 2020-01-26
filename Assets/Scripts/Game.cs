@@ -88,7 +88,7 @@ public class Game : MonoBehaviour
             Application.Quit();
         } //TODO dont be so lazy with this
 
-        if (Input.GetKeyDown(KeyCode.G)) SceneManager.LoadScene(3);
+        //if (Input.GetKeyDown(KeyCode.G)) SceneManager.LoadScene(3);
     }
 
     public void ShowMenu(bool show)

@@ -125,8 +125,9 @@ public class ChallengeSetter : MonoBehaviour
     private void Extreme() //I Wish I Could See || Darkness is my friend || I live in my parents basement
     {
         SpotLight.GetComponent<Light>().intensity = 0;
-        Torch.GetComponent<Light>().range = 10;
-        Torch.GetComponent<Light>().spotAngle = 150;
+        Torch.GetComponent<Light>().range = 30;
+        Torch.GetComponent<Light>().spotAngle = 100;
+        Torch.GetComponent<Light>().intensity = 0.2f;
         enemyHandler.SetEnemyCount(10);
     }
 }

@@ -37,6 +37,7 @@ public class Character : MonoBehaviour
 
     private IEnumerator DoMove(Vector3 position, Vector3 destination)
     {
+        
         // Move between the two specified positions over the specified amount of time
         if (position != destination)
         {
