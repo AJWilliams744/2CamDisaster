@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8966662656350595033}
   - component: {fileID: 8966662656350595032}
   - component: {fileID: 8966662656350595031}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pedistal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 8966662657153532051}
   - component: {fileID: 8966662657153532050}
   - component: {fileID: 8966662657153532054}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

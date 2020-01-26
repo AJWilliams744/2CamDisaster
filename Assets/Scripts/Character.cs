@@ -85,12 +85,18 @@ public class Character : MonoBehaviour
 
     private IEnumerator DoGoTo(List<EnvironmentTile> route)
     {
+        
         // Move through each tile in the given route
         if (route != null)
         {
-            Vector3 position = CurrentPosition.Position;
+            
+            //Vector3 position = CurrentPosition.Position;
+            Vector3 position = this.transform.position;
+
+            if(route.Count == 1) position = CurrentPosition.Position;
             for (int count = 0; count < route.Count; ++count)
             {
+                if (this.transform.position != CurrentPosition.Position && route.Count != 1) count++;
                 Vector3 next = route[count].Position;
                 yield return DoMove(position, next);
                 CurrentPosition = route[count];
@@ -104,13 +110,19 @@ public class Character : MonoBehaviour
     {
         // Clear all coroutines before starting the new route so 
         // that clicks can interupt any current route animation
-        StopAllCoroutines();
+        if(route != null) StopAllCoroutines();
         if (!IAmDead)
         {
             characterAnimation.SetWalking(true);
             StartCoroutine(DoGoTo(route));
         }
         
+    }
+
+    public void StopMovement()
+    {
+        StopAllCoroutines();
+        characterAnimation.SetWalking(false);
     }
 
     public void SetSitting(bool value)
@@ -149,7 +161,7 @@ public class Character : MonoBehaviour
     {
         StopAllCoroutines();
         characterAnimation.TriggerHit();
-        game.IAmDead(2);
+        game.IAmDead(5);
         IAmDead = true;
 
         StartCoroutine(ReduceSpotLight());

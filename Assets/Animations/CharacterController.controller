@@ -82,7 +82,8 @@ AnimatorState:
   m_Name: Shoulder Hit And Fall 0
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: 5542601332299779004}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -520,6 +521,28 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1101 &5542601332299779004
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 8383612606144834866}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.91935486
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &5882257039716977613
 AnimatorState:
   serializedVersion: 5
@@ -595,10 +618,10 @@ AnimatorStateMachine:
     m_Position: {x: 110, y: 330, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1573751692888408807}
-    m_Position: {x: -90, y: 420, z: 0}
+    m_Position: {x: -140, y: 330, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3995160239030520406}
-    m_Position: {x: 20, y: 520, z: 0}
+    m_Position: {x: -20, y: 520, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1760586204990514115}
     m_Position: {x: 370, y: 520, z: 0}
@@ -613,7 +636,7 @@ AnimatorStateMachine:
     m_Position: {x: 110, y: 670, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5725745799619616995}
-    m_Position: {x: 360, y: 190, z: 0}
+    m_Position: {x: 370, y: 190, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

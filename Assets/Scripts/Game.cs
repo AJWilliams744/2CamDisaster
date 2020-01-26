@@ -71,6 +71,8 @@ public class Game : MonoBehaviour
             int hits = Physics.RaycastNonAlloc(screenClick, mRaycastHits);
             if( hits > 0)
             {
+                if (!mMap.GetTileRotationStatus()) return;
+
                 EnvironmentTile tile = mRaycastHits[0].transform.GetComponent<EnvironmentTile>();
                 if (tile != null)
                 {
@@ -86,7 +88,7 @@ public class Game : MonoBehaviour
             Application.Quit();
         } //TODO dont be so lazy with this
 
-        //if (Input.GetKeyDown(KeyCode.G)) SceneManager.LoadScene(3);
+        if (Input.GetKeyDown(KeyCode.G)) SceneManager.LoadScene(3);
     }
 
     public void ShowMenu(bool show)
@@ -189,6 +191,7 @@ public class Game : MonoBehaviour
             {
                 counter = CounterLength;
                 mMap.RotateAllTiles();
+                mCharacter.StopMovement();
                 audioManager.PlayMetalDoorSound();
                 challengeSetter.WorldChanged();
             }

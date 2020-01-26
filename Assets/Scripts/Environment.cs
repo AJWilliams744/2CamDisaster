@@ -533,6 +533,7 @@ public class Environment : MonoBehaviour
 
     public void RotateAllTiles()
     {
+        
         for (int x = 0; x < Size.x; ++x)
         {
             for (int y = 0; y < Size.y; ++y)
@@ -586,16 +587,17 @@ public class Environment : MonoBehaviour
     private IEnumerator RotateOverTime(EnvironmentTile tile, int rotation)
     {
         
-        float roationInterval = 0.5f;
+        float roationInterval = 20f;
         if (rotation >= 360) rotation = 0;
         
         while (Mathf.RoundToInt(tile.transform.eulerAngles.y) != rotation)
         {
             TileRotaionFinish = false;
-            tile.transform.RotateAround(tile.GetRotationBlockPosition(), Vector3.up, roationInterval);
-            yield return new WaitForSeconds(0.0170022672f); // TODO probably should change this
+            tile.transform.RotateAround(tile.GetRotationBlockPosition(), Vector3.up, roationInterval * Time.deltaTime);
+            yield return new WaitForEndOfFrame(); 
         }
-        tile.transform.eulerAngles = new Vector3(0, rotation, 0);
+        tile.transform.eulerAngles = new Vector3(0, Mathf.RoundToInt(rotation), 0);
+        tile.transform.localPosition = new Vector3(Mathf.RoundToInt(tile.transform.localPosition.x), Mathf.RoundToInt(tile.transform.localPosition.y), Mathf.RoundToInt(tile.transform.localPosition.z));
         TileRotaionFinish = true;
     }
 

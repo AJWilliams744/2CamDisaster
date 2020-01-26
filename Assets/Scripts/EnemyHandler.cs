@@ -29,6 +29,12 @@ public class EnemyHandler : MonoBehaviour
     private void SpawnEnemy()
     {   
         EnvironmentTile randomPosition = enviroment.GetRandomTile();
+        if(randomPosition.Position.z < -50 || randomPosition.Position.x < -20)
+        {
+            SpawnEnemy();
+            return;
+        }
+        
         GameObject enemy = Instantiate(EnemyPrefab, randomPosition.Position, Quaternion.identity);
         enemy.GetComponent<EnemyAI>().SetMap(enviroment);
         enemy.GetComponent<EnemyBody>().CurrentPosition = randomPosition;

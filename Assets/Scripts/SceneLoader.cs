@@ -6,7 +6,7 @@ using System.Collections;
 public class SceneLoader : MonoBehaviour
 {
     private bool wait = false;
-    public VideoPlayer VideoPlayer; // Drag & Drop the GameObject holding the VideoPlayer component
+    public VideoPlayer VideoPlayer;
    
     void Start()
     {
@@ -31,7 +31,8 @@ public class SceneLoader : MonoBehaviour
     private IEnumerator MinWait()
     {
         wait = false;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         wait = true;
+       
     }
 }

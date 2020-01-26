@@ -6,15 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/StartScene.unity
+    path: Assets/Scenes/CutScenes/StartScene.unity
     guid: 7e0631675f661fd4aa395335aad6c20e
   - enabled: 1
-    path: Assets/Scenes/Main.unity
+    path: Assets/Scenes/ControlMenus/CutSceneMainControls.unity
+    guid: cec7c7c001023e74aad2bdf877d9b9dd
+  - enabled: 1
+    path: Assets/Scenes/MainGames/Main.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/EndScene.unity
-    guid: 96bce7f1158e539468d7a71e45d7ac35
+    path: Assets/Scenes/ControlMenus/MainMiniControls.unity
+    guid: 628bcdfe2d755094cbfc06bc4c659520
   - enabled: 1
-    path: Assets/Scenes/MiniGame.unity
+    path: Assets/Scenes/MainGames/MiniGame.unity
     guid: c204cc3e6453c454791e77a997b8d6a0
+  - enabled: 1
+    path: Assets/Scenes/CutScenes/EndScene.unity
+    guid: 96bce7f1158e539468d7a71e45d7ac35
   m_configObjects: {}

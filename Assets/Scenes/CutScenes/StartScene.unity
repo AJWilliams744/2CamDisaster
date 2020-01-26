@@ -369,6 +369,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VideoPlayer: {fileID: 1379836741}
+  isVideo: 1
+  HideContinue: {fileID: 0}
 --- !u!1 &1737218559
 GameObject:
   m_ObjectHideFlags: 0

@@ -53,13 +53,14 @@ public class EnemyAI : MonoBehaviour
     public void TriggerArrived()
     {        //wait 5 seconds then move on
         character.SetSpeed(Speeds.stop);
+        StopAllCoroutines();
         if (PlayerCaught)
         {
             StartCoroutine(FunctionTimmer(StartMove,0, PlayerCaught));
         }
         else
         {
-            StartCoroutine(FunctionTimmer(StartMove, 5, PlayerCaught));
+            StartCoroutine(FunctionTimmer(StartMove, 8, PlayerCaught));
         }
         
     }
