@@ -1,6 +1,6 @@
-# 2CamDisaster
+# Forgetful Insomnia
 
-Double camera based horror game
+Duel camera based horror game for Grads in Games 2019 game jam
 
 Need Standard Assets pack
 For Cutscene viewing, need snaps prototype APCAC, aura 2
